@@ -11,8 +11,15 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 
 import com.rolufs.yelp.R
+import com.rolufs.yelp.model.YelpApiService
 import com.rolufs.yelp.viewmodel.ListingViewModel
 import kotlinx.android.synthetic.main.listing_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
+const val GETTY_ID = "zRlDhJgcwXEphTUhMaCfyw"
 
 class ListingFragment : Fragment() {
 
@@ -29,22 +36,24 @@ class ListingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewOfLayout = inflater.inflate(R.layout.listing_fragment, container, false)
-
-        reviews = viewOfLayout.findViewById(R.id.text_total_reviews)
-
-        reviews!!.setOnClickListener{ view ->
-            view.findNavController().navigate(R.id.action_listingFragment_to_reviewsFragment)
-
-        }
-
-        return viewOfLayout
+        return inflater.inflate(R.layout.listing_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ListingViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        text_total_reviews.setOnClickListener{
+            it.findNavController().navigate(R.id.action_listingFragment_to_reviewsFragment)
+        }
+
+        val yelpApiService = YelpApiService()
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val business = yelpApiService.getBusiness(GETTY_ID).await()
+            text_total_reviews.text = business.reviewCount.toString()
+        }
+
     }
 
 }
