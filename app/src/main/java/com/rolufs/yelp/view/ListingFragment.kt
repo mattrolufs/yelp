@@ -6,18 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 
 import com.rolufs.yelp.R
-import com.rolufs.yelp.model.YelpApiService
+import com.rolufs.yelp.model.yelpId
 import com.rolufs.yelp.viewmodel.ListingViewModel
 import kotlinx.android.synthetic.main.listing_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 const val GETTY_ID = "zRlDhJgcwXEphTUhMaCfyw"
 
@@ -47,13 +43,15 @@ class ListingFragment : Fragment() {
             it.findNavController().navigate(R.id.action_listingFragment_to_reviewsFragment)
         }
 
-        val yelpApiService = YelpApiService()
-
-        GlobalScope.launch(Dispatchers.Main) {
-            val business = yelpApiService.getBusiness(GETTY_ID).await()
-            text_total_reviews.text = business.reviewCount.toString()
-        }
-
+        viewModel.fetchBusiness(yelpId).observe(this, Observer {
+            text_address.text = it?.location?.formatAddress()?.toString()
+            text_phone.text = it?.displayPhone?.toString()
+            text_website.text = it?.url
+            text_name.text = it?.name
+            text_hours.text = it?.hours.toString()
+            text_total_reviews.text = it?.reviewCount.toString()
+            rating_bar.rating = it?.rating?.toFloat()!!
+        })
     }
 
 }

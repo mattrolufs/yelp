@@ -16,4 +16,16 @@ data class Location(
     val state: String,
     @SerializedName("zip_code")
     val zipCode: String
-)
+
+){
+    fun formatAddress() : String? {
+        var address : String? = ""
+
+        for(line in displayAddress){
+            address += line + "\n"
+        }
+
+        address = address?.trimEnd('\n')
+        return address
+    }
+}
