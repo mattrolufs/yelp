@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.navigation.findNavController
 
 import com.rolufs.yelp.R
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.listing_fragment.*
 class ListingFragment : Fragment() {
 
     private lateinit var viewOfLayout: View
-    private var button : Button? = null
+    private var reviews : TextView? = null
 
     companion object {
         fun newInstance() = ListingFragment()
@@ -30,9 +31,9 @@ class ListingFragment : Fragment() {
     ): View? {
         viewOfLayout = inflater.inflate(R.layout.listing_fragment, container, false)
 
-        button = viewOfLayout.findViewById(R.id.button)
+        reviews = viewOfLayout.findViewById(R.id.text_total_reviews)
 
-        button!!.setOnClickListener{ view ->
+        reviews!!.setOnClickListener{ view ->
             view.findNavController().navigate(R.id.action_listingFragment_to_reviewsFragment)
 
         }
