@@ -1,16 +1,22 @@
 package com.rolufs.yelp.view
 
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.text.Html
+import android.text.method.LinkMovementMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 
 import com.rolufs.yelp.R
+import com.rolufs.yelp.model.response.Hour
 import com.rolufs.yelp.model.yelpId
 import com.rolufs.yelp.viewmodel.ListingViewModel
 import kotlinx.android.synthetic.main.listing_fragment.*
@@ -32,7 +38,8 @@ class ListingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.listing_fragment, container, false)
+        viewOfLayout = inflater.inflate(R.layout.listing_fragment, container, false)
+        return viewOfLayout
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -45,13 +52,38 @@ class ListingFragment : Fragment() {
 
         viewModel.fetchBusiness(yelpId).observe(this, Observer {
             text_address.text = it?.location?.formatAddress()?.toString()
+
+            text_address.setOnClickListener{view ->
+                val gmmIntentUri = Uri.parse("geo:${it.coordinates.latitude},${it.coordinates.longitude}?q=${it.name}");
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+            }
+
             text_phone.text = it?.displayPhone?.toString()
-            text_website.text = it?.url
+            text_website.movementMethod = LinkMovementMethod.getInstance()
+            val website = it?.url
+            text_website.text = Html.fromHtml("<a href=\"${website}\">Visit Website</a>")
             text_name.text = it?.name
-            text_hours.text = it?.hours.toString()
+
+            var compHours = CustomHoursItemComponent(this.context!!, null)
+            compHours.day = "mon"
+            compHours.hours = "1-2"
+
+
+            //var compOpen = CustomOpenHoursComponent(it?.hours?.get(0), this.context!!, null, 0)
+            customOpenHoursComponent.setHours(it?.hours?.get(0))
+
+            //(viewOfLayout as ConstraintLayout).addView(compOpen)
+
+            //text_hours.text = it?.hours.toString()
             text_total_reviews.text = it?.reviewCount.toString()
             rating_bar.rating = it?.rating?.toFloat()!!
         })
+
+
     }
+
+
 
 }

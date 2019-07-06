@@ -23,13 +23,13 @@
         style="@style/Widget.Support.CoordinatorLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:numStars="5"
         android:rating="2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.66"
+        app:layout_constraintHorizontal_bias="0.005"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_hours" />
+        app:layout_constraintTop_toBottomOf="@+id/customOpenHoursComponent" />
 
 
     <TextView
@@ -65,7 +65,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="(310) 440-7300"
+        android:autoLink="phone"
+        android:text="(310) 440-"
         android:textColor="#E27D60"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
@@ -85,25 +86,6 @@
         app:layout_constraintTop_toBottomOf="@+id/text_phone" />
 
     <TextView
-        android:id="@+id/text_hours"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:singleLine="false"
-        android:text="Mon Closed
-        \n Tue 10:00 am - 5:30 pm
-        \n Wed 10:00 am - 5:30 pm
-        \n Thu 10:00 am - 5:30 pm
-        \n Fri 10:00 am - 5:30 pm
-        \n Sat 10:00 am - 9:00 pm
-        \n Sun 10:00 am - 5:30 pm"
-        android:textColor="#41B3A3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.071"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_website" />
-
-    <TextView
         android:id="@+id/text_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -117,18 +99,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+    <com.rolufs.yelp.view.CustomOpenHoursComponent
+        android:id="@+id/customOpenHoursComponent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="483dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_website" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
