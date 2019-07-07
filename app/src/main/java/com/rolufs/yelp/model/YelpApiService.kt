@@ -22,7 +22,7 @@ interface YelpApiService {
     fun getBusiness(@Path("business") business : String) : Deferred<Business>
 
     @GET("businesses/{business}/reviews")
-    fun getReviews(@Path("business") business : String) : Deferred<Review>
+    fun getReviews(@Path("business") business : String) : Deferred<ArrayList<Review>>
 
     companion object {
         operator fun invoke(): YelpApiService {
