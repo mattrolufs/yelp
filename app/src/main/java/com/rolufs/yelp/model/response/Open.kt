@@ -42,8 +42,8 @@ data class Open(
         var startObj = sdf.parse(formatStart)
         var endObj = sdf.parse(formatEnd)
 
-        var startTime = SimpleDateFormat("K:mm").format(startObj);
-        var endTime = SimpleDateFormat("K:mm").format(endObj);
+        var startTime = SimpleDateFormat("K:mm aa").format(startObj);
+        var endTime = SimpleDateFormat("K:mm aa").format(endObj);
 
         return startTime.toString() + " - " + endTime.toString()
     }

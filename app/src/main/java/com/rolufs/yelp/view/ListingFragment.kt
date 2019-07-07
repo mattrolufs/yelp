@@ -14,6 +14,9 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.TransformationUtils.fitCenter
 
 import com.rolufs.yelp.R
 import com.rolufs.yelp.model.response.Hour
@@ -46,29 +49,54 @@ class ListingFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ListingViewModel::class.java)
 
-        text_total_reviews.setOnClickListener{
-            it.findNavController().navigate(R.id.action_listingFragment_to_reviewsFragment)
-        }
+//        text_total_reviews.setOnClickListener{
+//            it.findNavController().navigate(R.id.action_listingFragment_to_reviewsFragment)
+//        }
 
         viewModel.fetchBusiness(yelpId).observe(this, Observer {
+
+            Glide
+                .with(context!!)
+                .load(it?.imageUrl)
+                .fitCenter()
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .into(image_header);
+
             text_address.text = it?.location?.formatAddress()?.toString()
 
-            text_address.setOnClickListener{view ->
+            card_reviews.setOnClickListener{view ->
+                view.findNavController().navigate(R.id.action_listingFragment_to_reviewsFragment)
+            }
+
+            card_address.setOnClickListener{view ->
                 val gmmIntentUri = Uri.parse("geo:${it.coordinates.latitude},${it.coordinates.longitude}?q=${it.name}");
                 val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);
             }
 
+            card_phone.setOnClickListener{view ->
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = Uri.parse("tel:${it?.displayPhone?.toString()}")
+                startActivity(intent)
+            }
+
+            card_website.setOnClickListener{view ->
+                val uriUrl = Uri.parse(it?.url)
+                val browserIntent = Intent(Intent.ACTION_VIEW, uriUrl)
+                startActivity(browserIntent)
+            }
+
+
             text_phone.text = it?.displayPhone?.toString()
-            text_website.movementMethod = LinkMovementMethod.getInstance()
-            val website = it?.url
-            text_website.text = Html.fromHtml("<a href=\"${website}\">Visit Website</a>")
+//            text_website.movementMethod = LinkMovementMethod.getInstance()
+//            val website = it?.url
+//            text_website.text = Html.fromHtml("<a href=\"${website}\">Visit Website</a>")
             text_name.text = it?.name
 
-            var compHours = CustomHoursItemComponent(this.context!!, null)
-            compHours.day = "mon"
-            compHours.hours = "1-2"
+//            var compHours = CustomHoursItemComponent(this.context!!, null)
+//            compHours.day = "mon"
+//            compHours.hours = "1-2"
 
 
             //var compOpen = CustomOpenHoursComponent(it?.hours?.get(0), this.context!!, null, 0)
@@ -77,8 +105,9 @@ class ListingFragment : Fragment() {
             //(viewOfLayout as ConstraintLayout).addView(compOpen)
 
             //text_hours.text = it?.hours.toString()
-            text_total_reviews.text = it?.reviewCount.toString()
+            text_total_reviews.text = "of ${it?.reviewCount.toString()} Reviews"
             rating_bar.rating = it?.rating?.toFloat()!!
+
         })
 
 

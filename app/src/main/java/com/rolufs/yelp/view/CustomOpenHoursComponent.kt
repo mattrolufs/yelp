@@ -33,6 +33,9 @@ class CustomOpenHoursComponent @JvmOverloads constructor(
     }
 
     fun renderHours(){
+
+        (viewOfLayout as LinearLayout).removeAllViews()
+
         for(open in this.hour!!.open){
             (viewOfLayout as LinearLayout).addView(CustomHoursItemComponent(open.formatDay(), open.formatHours(), context, null, 0))
         }
