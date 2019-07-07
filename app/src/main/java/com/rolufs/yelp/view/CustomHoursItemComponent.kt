@@ -4,9 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
-import android.widget.TextView
 import com.rolufs.yelp.R
-import com.rolufs.yelp.model.response.Hour
 import kotlinx.android.synthetic.main.hours_item.view.*
 
 class CustomHoursItemComponent @JvmOverloads constructor(

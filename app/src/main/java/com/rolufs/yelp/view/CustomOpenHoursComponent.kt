@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import com.rolufs.yelp.R
-import com.rolufs.yelp.model.response.Hour
-import com.rolufs.yelp.model.response.Open
-import kotlinx.android.synthetic.main.hours_item.view.*
+import com.rolufs.yelp.model.response.business.Hour
 
 class CustomOpenHoursComponent @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

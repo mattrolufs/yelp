@@ -1,10 +1,8 @@
-package com.rolufs.yelp.model.response
+package com.rolufs.yelp.model.response.business
 
 
 import com.google.gson.annotations.SerializedName
-import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.util.*
 
 data class Open(
     val day: Int,

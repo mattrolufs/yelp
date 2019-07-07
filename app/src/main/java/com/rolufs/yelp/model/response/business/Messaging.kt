@@ -1,4 +1,4 @@
-package com.rolufs.yelp.model.response
+package com.rolufs.yelp.model.response.business
 
 
 import com.google.gson.annotations.SerializedName
