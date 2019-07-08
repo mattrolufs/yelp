@@ -14,12 +14,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.rolufs.yelp.R
 import com.rolufs.yelp.model.yelpId
 import com.rolufs.yelp.viewmodel.ListingViewModel
 import kotlinx.android.synthetic.main.listing_fragment.*
+import kotlinx.android.synthetic.main.reviews_fragment.*
 
 class ListingFragment : Fragment() {
 
@@ -47,14 +50,14 @@ class ListingFragment : Fragment() {
             viewModel = activity?.run{ViewModelProviders.of(this).get(ListingViewModel::class.java)}?:
                     throw Exception("Invalid Activity")
 
+            val layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            recycler_view_photos.layoutManager = layoutManager
+
+
             viewModel.fetchBusiness(yelpId).observe(this, Observer {
 
-                Glide
-                    .with(context!!)
-                    .load(it?.imageUrl)
-                    .fitCenter()
-                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                    .into(image_header);
+                val photosAdapter = PhotosAdapter(it.photos)
+                recycler_view_photos.adapter = photosAdapter
 
                 card_reviews.setOnClickListener{view ->
                     val action = ListingFragmentDirections.actionListingFragmentToReviewsFragment(yelpId)
