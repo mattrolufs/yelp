@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.get
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -17,6 +18,8 @@ import com.rolufs.yelp.viewmodel.ReviewsViewModel
 import kotlinx.android.synthetic.main.reviews_fragment.*
 
 class ReviewsFragment : Fragment() {
+
+    val args : ReviewsFragmentArgs by navArgs()
 
     companion object {
         fun newInstance() = ReviewsFragment()
@@ -38,7 +41,7 @@ class ReviewsFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         recycler_view_reviews.layoutManager = layoutManager
 
-        viewModel.fetchReviews(yelpId).observe(this, Observer {reviews ->
+        viewModel.fetchReviews(args.businessId).observe(this, Observer {reviews ->
 
             val reviewsAdapter = ReviewsAdapter(reviews.reviews)
             recycler_view_reviews.adapter = reviewsAdapter

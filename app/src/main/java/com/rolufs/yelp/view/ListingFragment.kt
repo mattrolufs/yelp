@@ -60,7 +60,9 @@ class ListingFragment : Fragment() {
             text_address.text = it?.location?.formatAddress()?.toString()
 
             card_reviews.setOnClickListener{view ->
-                view.findNavController().navigate(R.id.action_listingFragment_to_reviewsFragment)
+                //view.findNavController().navigate(R.id.action_listingFragment_to_reviewsFragment)
+                val action = ListingFragmentDirections.actionListingFragmentToReviewsFragment(yelpId)
+                view.findNavController().navigate(action)
             }
 
             card_address.setOnClickListener{view ->
