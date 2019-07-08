@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_map"
+        android:icon="@drawable/icons8_place_marker"
+        android:title="Map" />
+    <item android:id="@+id/menu_web"
+        android:icon="@drawable/icons8_domain"
+        android:title="Web" />
+    <item android:id="@+id/menu_phone"
+        android:icon="@drawable/icons8_phone"
+        android:title="Phone" />
+</menu>

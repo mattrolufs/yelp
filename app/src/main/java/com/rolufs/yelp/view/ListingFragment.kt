@@ -42,7 +42,8 @@ class ListingFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ListingViewModel::class.java)
+        viewModel = activity?.run{ViewModelProviders.of(this).get(ListingViewModel::class.java)}?:
+                throw Exception("Invalid Activity")
 
 //        text_total_reviews.setOnClickListener{
 //            it.findNavController().navigate(R.id.action_listingFragment_to_reviewsFragment)

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+            android:title="Input Max N"
+            android:id="@+id/menu_search"
+            android:icon="@android:drawable/ic_menu_edit"
+            app:showAsAction="always|collapseActionView"
+            app:actionViewClass="androidx.appcompat.widget.Toolbar"
+    />
+    <item
+            android:id="@+id/summaryFragment"
+            android:icon="@android:drawable/ic_menu_info_details"
+            app:showAsAction="ifRoom"
+            android:title="Settings" />
+</menu>

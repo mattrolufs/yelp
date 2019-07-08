@@ -7,17 +7,18 @@
         android:layout_height="match_parent"
         tools:context=".view.MainActivity">
 
-    <!--include
-        android:id="@+id/include"
-        layout="@layout/toolbar"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_nav"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#E91E63"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/nav_host_fragment"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:menu="@menu/menu_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" /-->
+        tools:layout_editor_absoluteY="0dp" />
 
     <fragment
         android:id="@+id/nav_host_fragment"
@@ -25,9 +26,22 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@id/menu_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_nav"
+        app:navGraph="@navigation/nav_graph" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/menu_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_graph" />
+        app:menu="@menu/bottom_nav" />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
