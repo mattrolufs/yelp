@@ -4,16 +4,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel;
 import com.rolufs.yelp.model.YelpApiService
 import com.rolufs.yelp.model.response.review.Review
+import com.rolufs.yelp.model.response.review.Reviews
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class ReviewsViewModel : ViewModel() {
 
-    var mutableReviews = MutableLiveData<ArrayList<Review>>()
-    var reviews : ArrayList<Review>? = null
+    var mutableReviews = MutableLiveData<Reviews>()
+    var reviews : Reviews? = null
 
-    fun fetchReviews(businessId : String) : MutableLiveData<ArrayList<Review>>{
+    fun fetchReviews(businessId : String) : MutableLiveData<Reviews>{
 
         GlobalScope.launch(Dispatchers.Main) {
             val yelpApiService = YelpApiService()

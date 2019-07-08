@@ -3,6 +3,7 @@ package com.rolufs.yelp.model
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.rolufs.yelp.model.response.business.Business
 import com.rolufs.yelp.model.response.review.Review
+import com.rolufs.yelp.model.response.review.Reviews
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -22,7 +23,7 @@ interface YelpApiService {
     fun getBusiness(@Path("business") business : String) : Deferred<Business>
 
     @GET("businesses/{business}/reviews")
-    fun getReviews(@Path("business") business : String) : Deferred<ArrayList<Review>>
+    fun getReviews(@Path("business") business : String) : Deferred<Reviews>
 
     companion object {
         operator fun invoke(): YelpApiService {

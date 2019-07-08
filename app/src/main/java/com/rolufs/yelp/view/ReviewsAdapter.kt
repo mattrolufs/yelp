@@ -12,7 +12,7 @@ import com.rolufs.yelp.model.response.review.Review
 import kotlinx.android.synthetic.main.listing_fragment.view.*
 import kotlinx.android.synthetic.main.review_item.view.*
 
-class ReviewsAdapter(val reviews : MutableList<Review>) : RecyclerView.Adapter<ReviewsAdapter.ReviewHolder>(){
+class ReviewsAdapter(val reviews : List<Review>) : RecyclerView.Adapter<ReviewsAdapter.ReviewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.review_item, parent, false)
         return ReviewHolder(view)
@@ -36,11 +36,11 @@ class ReviewsAdapter(val reviews : MutableList<Review>) : RecyclerView.Adapter<R
                 .load(review?.user!!.imageUrl)
                 .fitCenter()
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .into(itemView.imageView);
+                .into(itemView.image_reviewer_avatar);
 
             itemView.text_reviewer_name.text = review.user.name
-            itemView.rating_bar.rating = review.rating.toFloat()
-            //itemView.text_review_date = review.timeCreated
+            itemView.rating_review_bar.rating = review.rating.toFloat()
+            itemView.text_review_date.text = review.formatDate()
             itemView.text_review.text = review.text
 
         }
