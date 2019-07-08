@@ -20,9 +20,7 @@ class ListingViewModel : ViewModel() {
             mutableBusiness.value = business
         }
 
-
         return mutableBusiness
-
     }
 
 }

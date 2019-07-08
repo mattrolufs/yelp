@@ -1,6 +1,5 @@
 package com.rolufs.yelp.view
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.rolufs.yelp.R
 import com.rolufs.yelp.model.response.review.Review
-import kotlinx.android.synthetic.main.listing_fragment.view.*
 import kotlinx.android.synthetic.main.review_item.view.*
 
 class ReviewsAdapter(val reviews : List<Review>) : RecyclerView.Adapter<ReviewsAdapter.ReviewHolder>(){
@@ -26,7 +24,6 @@ class ReviewsAdapter(val reviews : List<Review>) : RecyclerView.Adapter<ReviewsA
         val review = reviews.get(position)
         holder.setData(review)
     }
-
 
     inner class ReviewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         fun setData(review : Review?) {

@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.rolufs.yelp.R
 import kotlinx.android.synthetic.main.hours_item.view.*
-import java.time.LocalDateTime
-import java.util.*
 
 class CustomHoursItemComponent @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -18,13 +16,8 @@ class CustomHoursItemComponent @JvmOverloads constructor(
 
     constructor(day: String, hour: String, context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
             : this(context, attrs, defStyleAttr) {
-
-//        this.day = day
-//        this.hours = hour
-
         text_day.text = day
         text_hours_open.text = hour
-
     }
 
     init {
@@ -46,9 +39,6 @@ class CustomHoursItemComponent @JvmOverloads constructor(
             }
         }
 
-
-
     }
-
 
 }

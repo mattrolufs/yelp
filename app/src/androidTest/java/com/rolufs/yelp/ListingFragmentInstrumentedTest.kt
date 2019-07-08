@@ -1,7 +1,6 @@
 package com.rolufs.yelp
 
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -57,11 +56,6 @@ class ListingFragmentInstrumentedTest {
     @Test
     fun shouldHaveNumberOfReviewsGreaterThan3000(){
         onView(withId(R.id.text_total_reviews)).check(matches(withSubstring("30")))
-    }
-
-    @Test
-    fun shouldHaveStarRatingOf45(){
-        onView(withId(R.id.text_star_rating)).check(matches(withText("4.5")))
     }
 
     @Test

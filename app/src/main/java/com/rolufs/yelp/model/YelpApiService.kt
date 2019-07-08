@@ -2,7 +2,6 @@ package com.rolufs.yelp.model
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.rolufs.yelp.model.response.business.Business
-import com.rolufs.yelp.model.response.review.Review
 import com.rolufs.yelp.model.response.review.Reviews
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -50,4 +49,6 @@ interface YelpApiService {
                 .create(YelpApiService::class.java)
         }
     }
+
+
 }

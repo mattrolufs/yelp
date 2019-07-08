@@ -3,7 +3,7 @@ package com.rolufs.yelp.model.response.business
 
 import com.google.gson.annotations.SerializedName
 
-data class Location(
+open class Location(
     val address1: String,
     val address2: String,
     val address3: String,
@@ -17,11 +17,11 @@ data class Location(
     @SerializedName("zip_code")
     val zipCode: String
 
-){
-    fun formatAddress() : String? {
-        var address : String? = ""
+) {
+    fun formatAddress(displayAddress : List<String>): String? {
+        var address: String? = ""
 
-        for(line in displayAddress){
+        for (line in displayAddress) {
             address += line + "\n"
         }
 

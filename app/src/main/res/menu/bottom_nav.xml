@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/listingFragment"
+        android:icon="@drawable/icons8_a_home"
+        android:title="Home" />
+    <item android:id="@+id/reviewsFragment"
+        android:icon="@drawable/icons8_star"
+        android:title="Reviews" />
     <item android:id="@+id/menu_map"
         android:icon="@drawable/icons8_place_marker"
         android:title="Map" />

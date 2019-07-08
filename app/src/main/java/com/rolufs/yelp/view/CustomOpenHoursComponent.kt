@@ -1,7 +1,6 @@
 package com.rolufs.yelp.view
 
 import android.content.Context
-import android.icu.util.Calendar
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import android.widget.LinearLayout
 import com.rolufs.yelp.R
 import com.rolufs.yelp.model.response.business.Hour
 import com.rolufs.yelp.model.response.business.Open
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -50,13 +48,11 @@ class CustomOpenHoursComponent @JvmOverloads constructor(
             val day = opendays.get(i - j)
             var hours = ""
 
-            isOpenNow = true
-
             if (i != day.day) {
                 j++
                 hours = "Closed"
             } else {
-                hours = day.formatHours()
+                hours = day.formatHours(day.start, day.end)
                 hours += if (isOpenNow && day.day == currentDay - 1) "  Open now" else ""
             }
 

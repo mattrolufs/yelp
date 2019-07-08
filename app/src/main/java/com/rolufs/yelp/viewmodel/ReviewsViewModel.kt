@@ -1,9 +1,8 @@
 package com.rolufs.yelp.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel
 import com.rolufs.yelp.model.YelpApiService
-import com.rolufs.yelp.model.response.review.Review
 import com.rolufs.yelp.model.response.review.Reviews
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

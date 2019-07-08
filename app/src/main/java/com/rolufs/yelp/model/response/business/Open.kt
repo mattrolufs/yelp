@@ -4,14 +4,16 @@ package com.rolufs.yelp.model.response.business
 import com.google.gson.annotations.SerializedName
 import java.text.SimpleDateFormat
 
-data class Open(
+open class Open(
     val day: Int,
     val end: String,
     @SerializedName("is_overnight")
     val isOvernight: Boolean,
     val start: String
-){
+) {
+
     companion object {
+
         fun formatDay(day: Int): String {
 
             var format: String = ""
@@ -30,17 +32,11 @@ data class Open(
         }
     }
 
-    fun formatHours() : String {
+    fun formatHours(start: String, end: String): String {
 
-        var formatStart : String = ""
-        var formatEnd : String = ""
-
-        formatStart = start.substring(0, start.length - 2) + ":" + start.substring(start.length - 2, start.length)
-        formatEnd = end.substring(0, end.length - 2) + ":" + end.substring(end.length - 2, end.length)
-
-        val sdf = SimpleDateFormat("K:mm")
-        var startObj = sdf.parse(formatStart)
-        var endObj = sdf.parse(formatEnd)
+        val sdf = SimpleDateFormat("HHmm")
+        var startObj = sdf.parse(start)
+        var endObj = sdf.parse(end)
 
         var startTime = SimpleDateFormat("K:mm aa").format(startObj);
         var endTime = SimpleDateFormat("K:mm aa").format(endObj);
